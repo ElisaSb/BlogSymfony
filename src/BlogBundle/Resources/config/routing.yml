@@ -1,0 +1,53 @@
+login:
+    path: /login
+    defaults: { _controller: BlogBundle:Usuario:login }
+    
+registro:
+    path: /registro
+    defaults: { _controller: BlogBundle:Usuario:registro }
+    
+login_check:
+    path: /login_check
+    
+logout:
+    path: /logout
+
+blog_homepage:
+    path:     /blog
+    defaults: { _controller: BlogBundle:Entrada:index }
+    
+blog_index_etiqueta:
+    path:     /etiquetas
+    defaults: { _controller: BlogBundle:Etiqueta:index }
+    
+blog_add_etiqueta:
+    path:     /etiqueta/add
+    defaults: { _controller: BlogBundle:Etiqueta:add }
+    
+blog_delete_etiqueta:
+    path:     /etiqueta/delete/{id}
+    defaults: { _controller: BlogBundle:Etiqueta:delete }
+    
+blog_index_categoria:
+    path:     /categorias
+    defaults: { _controller: BlogBundle:Categoria:index }
+    
+blog_add_categoria:
+    path:     /categoria/add
+    defaults: { _controller: BlogBundle:Categoria:add }
+    
+blog_edit_categoria:
+    path:     /categoria/edit/{id}
+    defaults: { _controller: BlogBundle:Categoria:edit }    
+    
+blog_delete_categoria:
+    path:     /categoria/delete/{id}
+    defaults: { _controller: BlogBundle:Categoria:delete }
+    
+blog_add_entrada:
+    path:     /entrada/add
+    defaults: { _controller: BlogBundle:Entrada:add }
+    
+blog_delete_entrada:
+    path:     /entrada/delete/{id}
+    defaults: { _controller: BlogBundle:Entrada:delete }

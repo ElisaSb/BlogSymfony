@@ -1,0 +1,39 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block menu %}
+{% include "BlogBundle:Categoria:menu.categorias.html.twig" with { 'categorias': categorias } %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-lg-10">
+        <h1>Bienvenido</h1>
+
+        {% if app.session.flashbag().get('status_success') is defined %}
+            {% for message in app.session.flashbag().get("status_success") %}
+                {% if message != "" %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+    <div class="col-lg-6">
+
+        {% for entrada in entradas %}
+
+            <p class="float-left"><img width="150" src="{{ asset("uploads/"~entrada.imagen) }}"/></p>
+            <p style="margin-left: 160px;">{{ entrada.titulo }}<br/>
+                {{ entrada.categoria.nombre }}<br/>
+                {% for ent in entrada.entradaEtiqueta %}
+                    {{ ent.etiqueta.nombre }}, 
+                {% endfor %}
+            </p>
+            <p><a href="{{path("blog_delete_entrada",{"id":entrada.id})}}"/></a></p>
+            
+            <div class="clearfix"></div>
+            <hr/>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+BlogBundle\Entity\Etiqueta:
+    properties:
+        nombre:
+            - NotBlank: { message: "El nombre de la etiqueta es obligatorio." }
+            - Length: 
+                min: 2
+                minMessage: "El nombre de la etiqueta tiene que tener más de dos caracteres."
+                
+BlogBundle\Entity\Categoria:
+    properties:
+        nombre:
+            - NotBlank: { message: "El nombre de la categoria es obligatorio." }
+            - Length: 
+                min: 2
+                minMessage: "El nombre de la categoria tiene que tener más de dos caracteres."                

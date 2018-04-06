@@ -1,0 +1,18 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="col-lg-4">
+        <h1>Bienvenido</h1>
+
+        {% if app.session.flashbag().get('status_success') is defined %}
+            {% for message in app.session.flashbag().get("status_success") %}
+                {% if message != "" %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="clearfix"></div>
+    
+{% endblock %}

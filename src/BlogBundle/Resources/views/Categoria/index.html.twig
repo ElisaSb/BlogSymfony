@@ -1,0 +1,57 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block content %}
+
+    <div class="col-lg-4">
+        <br/>
+        <h2>Lista de Categorias</h2>
+    </div>
+
+    <div class="col-lg-8">
+        {% if app.session.flashbag().get('status_success') is defined %}
+            {% for message in app.session.flashbag().get("status_success") %}
+                {% if message != "" %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="col-lg-8">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scole="col">ID</th>
+                    <th scole="col">Nombre</th>
+                    <th scole="col">Descripción</th>
+                    <th scole="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-secondary">
+                    <td>?</td>
+                    <td><a class="btn btn-primary btn-sm" href="/categoria/add"/>Añadir categoria</a></td>
+                    <td colspan="2">Crea más categorias</td>
+                </tr>
+                {% for categoria in categorias %}
+                    <tr>
+                        <td>{{ categoria.id }}</td>
+                        <td>{{ categoria.nombre }}</td>
+                        <td>{{ categoria.descripcion }}</td>
+                        <td>
+                            {% if categoria.entradas | length == 0 %}
+                                <a class="btn btn-danger btn-sm" href="{{path("blog_delete_categoria" ,{"id":categoria.id}) }}"/>Eliminar</a>
+                            {% else %}
+                                Categoria en uso
+                            {% endif %}
+                            <a class="btn btn-warning btn-sm" href="{{path("blog_edit_categoria" ,{"id":categoria.id}) }}"/>Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+    </div>
+
+    <div class="clearfix"></div>
+
+{% endblock %}

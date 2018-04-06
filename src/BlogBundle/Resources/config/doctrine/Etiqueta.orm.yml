@@ -1,0 +1,31 @@
+BlogBundle\Entity\Etiqueta:
+    type: entity
+    table: etiquetas
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        descripcion:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    oneToMany:
+        entradaEtiqueta:
+            targetEntity: EntradaEtiqueta
+            mappedBy: etiqueta
+            cascade: ["persist"]
+    lifecycleCallbacks: {  }

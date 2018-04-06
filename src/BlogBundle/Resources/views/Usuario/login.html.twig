@@ -1,0 +1,39 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block content %}
+
+    <div class="col-lg-4">
+        <br/>
+        <h2>Identifícate</h2>
+        <form action="{{path('login_check')}}" method="post">
+            <label>Email:</label>
+            <input type="email" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
+            <br/>
+            <label>Contraseña:</label>
+            <input type="password" id="password" name="_password" class="form-control"/>
+            <br/>
+            <input type="submit" value="Entrar" class="btn btn-success" />
+            <input type="hidden" name="_target_path" value="/login"/>
+        </form>
+
+        <br/>
+        <a href="{{path("registro")}}"/>Quiero registrarme</a>
+
+</div>
+
+<br/>
+{% if app.user != null %}
+    {{ dump(app.user) }}
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+    <div class="alert alert-info">Estas logueado como usuario normal</div>
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="alert alert-info">Estas logueado como ADMINISTRADOR TODOPODEROSO</div>
+{% endif %}
+
+<div class="clearfix"></div>
+
+{% endblock %}

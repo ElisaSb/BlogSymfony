@@ -1,0 +1,51 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="col-lg-6">
+        <br/>
+        <h2>Lista de Etiquetas</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scole="col">ID</th>
+                    <th scole="col">Nombre</th>
+                    <th scole="col">Descripción</th>
+                    <th scole="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-secondary">
+                    <td>?</td>
+                    <td><a class="btn btn-primary btn-sm" href="/etiqueta/add"/>Añadir etiqueta</a></td>
+                    <td colspan="2">Crea más etiquetas</td>
+                </tr>
+                {% for etiqueta in etiquetas %}
+                    <tr>
+                        <td>{{ etiqueta.id }}</td>
+                        <td>{{ etiqueta.nombre }}</td>
+                        <td>{{ etiqueta.descripcion }}</td>
+                        <td>
+                            {% if etiqueta.entradaEtiqueta | length == 0 %}
+                                <a class="btn btn-danger btn-sm" href="{{path("blog_delete_etiqueta" ,{"id":etiqueta.id}) }}"/>Eliminar</a>
+                            {% else %}
+                                Etiqueta en uso
+                            {% endif %}
+                            <!--<a class="btn btn-success btn-sm" href="#"/>Editar</a>-->
+                        </td>
+                    </tr>
+                {% endfor %}
+            <tbody>
+        </table>
+    </div>
+
+    {% if app.session.flashbag().get('status_success') is defined %}
+        {% for message in app.session.flashbag().get("status_success") %}
+            {% if message != "" %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="clearfix"></div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+pruebas_index:
+    path: /pruebas/{idioma}/{nombre}/{apellido}/{pagina}
+    defaults: { _controller: AppBundle:Pruebas:index, idioma: es, nombre: Carlos, apellido: Aguilar, pagina: 1 }
+    methods: [GET, POST]
+    requirements: 
+        nombre: "[a-zA-Z]*"
+        apellido: "[a-zA-Z]*"
+        pagina: \d+
+        idioma: es|en|fr|jp
+        
+pruebas_create:
+    path: /pruebas/create
+    defaults: {  _controller: AppBundle:Pruebas:create }
+    
+pruebas_read:
+    path: /pruebas/read
+    defaults: {  _controller: AppBundle:Pruebas:read }
+    
+pruebas_update:
+    path: /pruebas/update/{id}/{name}/{description}/{price}
+    defaults: {  _controller: AppBundle:Pruebas:update }
+    
+pruebas_delete:
+    path: /pruebas/delete/{id}
+    defaults: {  _controller: AppBundle:Pruebas:delete }
+    
+pruebas_native:
+    path: /pruebas/native
+    defaults: {  _controller: AppBundle:Pruebas:nativeSQL }
+    
+pruebas_form:
+    path: /pruebas/form
+    defaults: {  _controller: AppBundle:Pruebas:form }
+    
+pruebas_validate_email:
+    path: /pruebas/validar-email/{email}
+    defaults: {  _controller: AppBundle:Pruebas:validarEmail }

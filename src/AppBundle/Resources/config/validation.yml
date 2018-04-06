@@ -1,0 +1,14 @@
+AppBundle\Entity\Productos:
+    properties:
+        name:
+            - NotBlank: { message: "El titulo no puede estar vacio" }
+            - Length: 
+                min: 2
+                minMessage: "El titulo tiene que tener más de dos caracteres"
+        description:
+            - NotBlank: { message: "La descripción no puede estar vacia" }
+#        price:
+#            - Type:
+#                type: numeric
+#                message: "El precio tiene que ser numérico"
+            

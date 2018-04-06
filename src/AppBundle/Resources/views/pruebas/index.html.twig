@@ -1,0 +1,57 @@
+{% extends "::layout.html.twig" %}
+{% block container %}
+    {{parent()}}
+    <h3>{{saludo}}</h3>
+    {{texto}}
+    
+    {# Esto es un comentario en Twig de ejemplo #}
+    <hr/>
+    {% if fruta.pera starts with "r" %}
+        {{fruta.pera}}
+    {% endif %}
+    
+    <hr/>
+    {% if fruta.manzana ends with "n" %}
+        {{fruta.manzana}}
+    {% endif %}
+    
+    <hr/>
+    {% set variable = "Hola Twig" %}
+    {{variable}}
+    
+    <hr/>
+    {% if productos|length > 4 %}
+        <ul>
+        {% for p in productos %}
+            <li>{{ p.producto }} - {{ p.precio }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <hr/>
+    {% set fecha = date("-2 days","Europe/Madrid") %}
+    {{ dump(fecha) }}
+    
+    <hr/>
+    {{ date() | date('d-m-Y') }}
+    
+    <hr/>
+    {{ include("AppBundle::partial.html.twig") }}
+    <p>Mínimo (3) --> {{ min(random(10), 5, 9) }}, Máximo (4) -->  {{ max(73, 33, 53, random(100)) }}, Aleatorio (de 2 y 0 incluido) --> {{ random(2) }}</p>
+    
+    <hr/>
+    {{ random(["Batman   ", "Wonderwoman,", "  Los Juegos del Hambre", "The Witcher:", "Zelda;"])|trim(":") }}
+    
+    <hr/>
+    {% for i in range(0,25,3) %}
+        {{i}}<br/>
+    {% endfor %}
+    
+    <hr/>
+    {{ generateTable( productos) | raw }}
+    
+    <hr/>
+    {# Siempre el primer parámetro es el que le ponemos el primero, después de añadir la tubería 
+    escribimos el nombre del filtro y a continuación le pasamos los siguientes datos por parámetro #}
+    {{ "cadena de texto"| addText(3) }}
+{% endblock %}
