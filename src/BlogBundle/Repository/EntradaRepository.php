@@ -25,7 +25,7 @@ class EntradaRepository extends \Doctrine\ORM\EntityRepository {
 
         //$etiquetas -= ",";
 
-        $etiquetas = explode(", ", $etiquetas);
+        $etiquetas = explode(",", $etiquetas);
 
         foreach ($etiquetas as $etiqueta) {
             $isset_etiqueta = $etiqueta_repo->findOneBy(array(
@@ -65,6 +65,21 @@ class EntradaRepository extends \Doctrine\ORM\EntityRepository {
         $dql = "SELECT e FROM BlogBundle\Entity\Entrada e ORDER BY e.id DESC";
 
         $query = $em->createQuery($dql)
+            ->setFirstResult($numeroPagina*($currentPagina-1))
+            ->setMaxResults($numeroPagina);
+
+        $paginador = new Paginator($query, $fetchJoinCollection = true);
+        return $paginador;
+    }
+
+    public function getCategoriaEntradas($categoria, $numeroPagina=3, $currentPagina=1){
+
+        $em = $this->getEntityManager();
+
+        $dql = "SELECT e FROM BlogBundle\Entity\Entrada e WHERE e.categoria = :categoria ORDER BY e.id DESC";
+
+        $query = $em->createQuery($dql)
+            ->setParameter("categoria", $categoria)
             ->setFirstResult($numeroPagina*($currentPagina-1))
             ->setMaxResults($numeroPagina);
 

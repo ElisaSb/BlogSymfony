@@ -38,7 +38,11 @@ blog_add_categoria:
     
 blog_edit_categoria:
     path:     /categoria/edit/{id}
-    defaults: { _controller: BlogBundle:Categoria:edit }    
+    defaults: { _controller: BlogBundle:Categoria:edit }
+
+blog_read_categoria:
+    path:     /categoria/{id}/{pagina}
+    defaults: { _controller: BlogBundle:Categoria:categoria, pagina:1 }
     
 blog_delete_categoria:
     path:     /categoria/delete/{id}

@@ -8,26 +8,30 @@ use BlogBundle\Entity\Categoria;
 use BlogBundle\Form\CategoriaType;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class CategoriaController extends Controller {
+class CategoriaController extends Controller
+{
 
     private $session;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->session = new Session();
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
 
         $em = $this->getDoctrine()->getManager();
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
         $categorias = $categoria_repo->findAll();
 
         return $this->render("BlogBundle:Categoria:index.html.twig", array(
-                    "categorias" => $categorias
+            "categorias" => $categorias
         ));
     }
 
-    public function addAction(Request $request) {
+    public function addAction(Request $request)
+    {
 
         $categoria = new Categoria();
         $form = $this->createForm(CategoriaType::class, $categoria);
@@ -65,11 +69,12 @@ class CategoriaController extends Controller {
         }
 
         return $this->render("BlogBundle:Categoria:add.html.twig", array(
-                    "form" => $form->createView()
+            "form" => $form->createView()
         ));
     }
 
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
 
         $em = $this->getDoctrine()->getManager();
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
@@ -83,7 +88,8 @@ class CategoriaController extends Controller {
         return $this->redirectToRoute("blog_index_categoria");
     }
 
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
 
         $em = $this->getDoctrine()->getManager();
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
@@ -92,7 +98,7 @@ class CategoriaController extends Controller {
         $form = $this->createForm(CategoriaType::class, $categoria);
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
@@ -121,8 +127,32 @@ class CategoriaController extends Controller {
         }
 
         return $this->render("BlogBundle:Categoria:edit.html.twig", array(
-                    "form" => $form->createView()
+            "form" => $form->createView()
         ));
+    }
+
+    public function categoriaAction($id, $pagina)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categoria = $categoria_repo->find($id);
+
+        $entrada_repo = $em->getRepository("BlogBundle:Entrada");
+        $entradas = $entrada_repo->getCategoriaEntradas($categoria, 3, $pagina);
+
+        $totalItems = count($entradas);
+        $pagesCount = ceil($totalItems/3);
+
+        return $this->render("BlogBundle:Categoria:categoria.html.twig", [
+            "categoria" => $categoria,
+            "categorias" => $categoria_repo->findAll(),
+            "entradas" => $entradas,
+            "totalItems" => $totalItems,
+            "pagesCount" => $pagesCount,
+            "pagina" => $pagina,
+            "pagina_m" => $pagina
+        ]);
     }
 
 }

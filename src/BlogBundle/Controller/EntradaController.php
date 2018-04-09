@@ -138,7 +138,7 @@ class EntradaController extends Controller
 
         $etiquetas="";
         foreach ($entrada->getEntradaEtiqueta() as $entradaEtiqueta){
-            $etiquetas.=$entradaEtiqueta->getEtiqueta()->getNombre().", ";
+            $etiquetas.=$entradaEtiqueta->getEtiqueta()->getNombre().",";
         }
 
         $form = $this->createForm(EntradaType::class, $entrada);
