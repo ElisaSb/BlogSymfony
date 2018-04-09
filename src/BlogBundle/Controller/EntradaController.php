@@ -18,9 +18,8 @@ class EntradaController extends Controller
         $this->session = new Session();
     }
 
-    public function indexAction($pagina)
+    public function indexAction(Request $request, $pagina)
     {
-
         $em = $this->getDoctrine()->getManager();
         $entrada_repo = $em->getRepository("BlogBundle:Entrada");
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
@@ -48,6 +47,10 @@ class EntradaController extends Controller
         $entrada = new Entrada();
         $form = $this->createForm(EntradaType::class, $entrada);
 
+        $em = $this->getDoctrine()->getManager();
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -56,6 +59,7 @@ class EntradaController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $categoria_repo = $em->getRepository("BlogBundle:Categoria");
                 $entrada_repo = $em->getRepository("BlogBundle:Entrada");
+                $categorias = $categoria_repo->findAll();
 
                 $entrada = new Entrada();
                 $entrada->setTitulo($form->get("titulo")->getData());
@@ -64,10 +68,14 @@ class EntradaController extends Controller
 
                 //Subir fichero
                 $fichero = $form["imagen"]->getData();
-                $ext = $fichero->guessExtension();
-                $fichero_nombre = time() . "." . $ext;
-                $fichero->move("uploads", $fichero_nombre);
-                $entrada->setImagen($fichero_nombre);
+                if( !empty($fichero) && $fichero!=null ) {
+                    $ext = $fichero->guessExtension();
+                    $fichero_nombre = time() . "." . $ext;
+                    $fichero->move("uploads", $fichero_nombre);
+                    $entrada->setImagen($fichero_nombre);
+                }else{
+                    $entrada->setImagen(null);
+                }
 
                 $categoria = $categoria_repo->find($form->get("categoria")->getData());
                 $entrada->setCategoria($categoria);
@@ -101,7 +109,8 @@ class EntradaController extends Controller
         }
 
         return $this->render("BlogBundle:Entrada:add.html.twig", array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "categorias" => $categorias
         ));
     }
 
@@ -133,8 +142,10 @@ class EntradaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entrada_repo = $em->getRepository("BlogBundle:Entrada");
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
 
         $entrada = $entrada_repo->find($id);
+        $entrada_imagen = $entrada->getImagen();
 
         $etiquetas="";
         foreach ($entrada->getEntradaEtiqueta() as $entradaEtiqueta){
@@ -148,16 +159,23 @@ class EntradaController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
+                /*
                 $entrada->setTitulo($form->get("titulo")->getData());
                 $entrada->setContenido($form->get("contenido")->getData());
                 $entrada->setEstado($form->get("estado")->getData());
+                */
 
                 //Subir fichero
                 $fichero = $form["imagen"]->getData();
-                $ext = $fichero->guessExtension();
-                $fichero_nombre = time() . "." . $ext;
-                $fichero->move("uploads", $fichero_nombre);
-                $entrada->setImagen($fichero_nombre);
+                if( !empty($fichero) && $fichero!=null ) {
+                    $ext = $fichero->guessExtension();
+                    $fichero_nombre = time() . "." . $ext;
+                    $fichero->move("uploads", $fichero_nombre);
+
+                    $entrada->setImagen($fichero_nombre);
+                } else{
+                    $entrada->setImagen($entrada_imagen);
+                }
 
                 $categoria = $categoria_repo->find($form->get("categoria")->getData());
                 $entrada->setCategoria($categoria);
@@ -204,7 +222,8 @@ class EntradaController extends Controller
         return $this->render("BlogBundle:Entrada:edit.html.twig", array(
             "form" => $form->createView(),
             "entrada" => $entrada,
-            "etiquetas" => $etiquetas
+            "etiquetas" => $etiquetas,
+            "categorias" => $categorias
         ));
     }
 

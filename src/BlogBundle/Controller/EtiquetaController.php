@@ -36,6 +36,10 @@ class EtiquetaController extends Controller {
         $etiqueta = new Etiqueta();
         $form = $this->createForm(EtiquetaType::class, $etiqueta);
 
+        $em = $this->getDoctrine()->getManager();
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -69,7 +73,8 @@ class EtiquetaController extends Controller {
         }
 
         return $this->render("BlogBundle:Etiqueta:add.html.twig", array(
-                    "form" => $form->createView()
+            "form" => $form->createView(),
+            "categorias" => $categorias
         ));
     }
 

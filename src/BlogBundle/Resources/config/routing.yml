@@ -13,8 +13,10 @@ logout:
     path: /logout
 
 blog_homepage:
-    path:     /blog/{pagina}
+    path:     /{_locale}/blog/{pagina}
     defaults: { _controller: BlogBundle:Entrada:index, pagina:1 }
+    requirements:
+      _locale: en|es
     
 blog_index_etiqueta:
     path:     /etiquetas
@@ -40,13 +42,13 @@ blog_edit_categoria:
     path:     /categoria/edit/{id}
     defaults: { _controller: BlogBundle:Categoria:edit }
 
-blog_read_categoria:
-    path:     /categoria/{id}/{pagina}
-    defaults: { _controller: BlogBundle:Categoria:categoria, pagina:1 }
-    
 blog_delete_categoria:
     path:     /categoria/delete/{id}
     defaults: { _controller: BlogBundle:Categoria:delete }
+
+blog_read_categoria:
+    path:     /categoria/read/{id}/{pagina}
+    defaults: { _controller: BlogBundle:Categoria:categoria, pagina:1 }
     
 blog_add_entrada:
     path:     /entrada/add

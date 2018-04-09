@@ -1,10 +1,10 @@
 {% extends "BlogBundle::layout.html.twig" %}
 
-{#
+
 {% block menu %}
     {% include "BlogBundle:Categoria:menu.categorias.html.twig" with { 'categorias': categorias } %}
 {% endblock %}
-#}
+
 
 {% block content %}
 
@@ -30,27 +30,36 @@
         <hr/>
     {% endfor %}
 
-    <nav aria-label="navigation">
-        <ul class="pagination">
-            {% if(pagina!=1) %}
-                {% set pagina = pagina-1 %}
-            {% endif %}
+    {% if(totalItems != 0) %}
+        <nav aria-label="navigation">
+            <ul class="pagination">
 
-            <li class="page-item"><a class="page-link" href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina }) }}">Anterior</a>
-            </li>
-            {% for i in 1..pagesCount %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":i }) }}">{{ i }}</a>
+                {% if(pagina!=1) %}
+                    {% set pagina = pagina-1 %}
+                {% endif %}
+                <li class="page-item"><a class="page-link"
+                                         href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina }) }}">Anterior</a>
                 </li>
-            {% endfor %}
 
-            {% if(pagina_m!=pagesCount) %}
-                {% set pagina_m = pagina_m+1 %}
-            {% endif %}
-            <li class="page-item"><a class="page-link" href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina_m }) }}">Siguiente</a>
-            </li>
-        </ul>
-    </nav>
+                {% for i in 1..pagesCount %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":i }) }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if(pagina_m!=pagesCount) %}
+                    {% set pagina_m = pagina_m+1 %}
+                {% endif %}
+                <li class="page-item"><a class="page-link"
+                                         href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina_m }) }}">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+    {% else %}
+        <div class="alert alert-info">Esta categoría no ha sido usada.</div>
+    {% endif %}
+
     </div>
 
 {% endblock %}

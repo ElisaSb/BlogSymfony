@@ -28,8 +28,10 @@
 
             {% if (app.user.id is defined) and (entrada.usuario.id == app.user.id) %}
                 <p style="margin-left: 160px;">
-                    <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">Eliminar</a>
-                    <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}">Editar</a>
+                    <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">{% trans %}btn_delete{% endtrans %}</a>
+                    <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}">
+                        {% trans %}btn_edit{% endtrans %}
+                    </a>
                 </p>
             {% endif %}
 
@@ -54,7 +56,9 @@
                 {% if(pagina_m!=pagesCount) %}
                     {% set pagina_m = pagina_m+1 %}
                 {% endif %}
-                <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina_m }) }}">Siguiente</a>
+                <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina_m }) }}">
+                        Siguiente
+                    </a>
                 </li>
             </ul>
         </nav>

@@ -72,7 +72,7 @@ class EntradaRepository extends \Doctrine\ORM\EntityRepository {
         return $paginador;
     }
 
-    public function getCategoriaEntradas($categoria, $numeroPagina=3, $currentPagina=1){
+    public function getCategoriaEntradas($categoria, $paginaSize=3, $currentPagina=1){
 
         $em = $this->getEntityManager();
 
@@ -80,8 +80,8 @@ class EntradaRepository extends \Doctrine\ORM\EntityRepository {
 
         $query = $em->createQuery($dql)
             ->setParameter("categoria", $categoria)
-            ->setFirstResult($numeroPagina*($currentPagina-1))
-            ->setMaxResults($numeroPagina);
+            ->setFirstResult($paginaSize*($currentPagina-1))
+            ->setMaxResults($paginaSize);
 
         $paginador = new Paginator($query, $fetchJoinCollection = true);
         return $paginador;

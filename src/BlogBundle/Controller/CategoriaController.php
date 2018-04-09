@@ -38,6 +38,10 @@ class CategoriaController extends Controller
 
         $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
+
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
@@ -69,7 +73,8 @@ class CategoriaController extends Controller
         }
 
         return $this->render("BlogBundle:Categoria:add.html.twig", array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "categorias" => $categorias
         ));
     }
 
@@ -94,6 +99,7 @@ class CategoriaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
         $categoria = $categoria_repo->find($id);
+        $categorias = $categoria_repo->findAll();
 
         $form = $this->createForm(CategoriaType::class, $categoria);
 
@@ -127,7 +133,8 @@ class CategoriaController extends Controller
         }
 
         return $this->render("BlogBundle:Categoria:edit.html.twig", array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "categorias" => $categorias
         ));
     }
 
