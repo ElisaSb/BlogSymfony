@@ -8,30 +8,39 @@ use BlogBundle\Entity\Usuario;
 use BlogBundle\Form\UsuarioType;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class UsuarioController extends Controller {
+class UsuarioController extends Controller
+{
 
     private $session;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->session = new Session();
     }
 
-    public function loginAction(Request $request) {
+    public function loginAction(Request $request)
+    {
         $authenticationUtils = $this->get("security.authentication_utils");
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        $em = $this->getDoctrine()->getManager();
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
 
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class, $usuario);
 
         return $this->render("BlogBundle:Usuario:login.html.twig", array(
-                    "error" => $error,
-                    "last_username" => $lastUsername,
-                    "form" => $form->CreateView()
+            "error" => $error,
+            "last_username" => $lastUsername,
+            "form" => $form->CreateView(),
+            "categorias" => $categorias
         ));
     }
 
-    public function registroAction(Request $request) {
+    public function registroAction(Request $request)
+    {
 
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class, $usuario);
@@ -40,11 +49,11 @@ class UsuarioController extends Controller {
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $em= $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
                 $usuario_repo = $em->getRepository("BlogBundle:Usuario");
-                $usuario = $usuario_repo->findOneBy(array("email"=>$form->get("email")->getData()));
-                
-                if(count($usuario)==0) {
+                $usuario = $usuario_repo->findOneBy(array("email" => $form->get("email")->getData()));
+
+                if (count($usuario) == 0) {
                     $usuario = new Usuario;
                     $usuario->setNombre($form->get("nombre")->getData());
                     $usuario->setApellido($form->get("apellido")->getData());
@@ -69,7 +78,7 @@ class UsuarioController extends Controller {
                         $status_success = "";
                         $status_error = "No te has registrado correctamente";
                     }
-                }else{
+                } else {
                     $status_success = "";
                     $status_error = "Error: El correo introducido ya está registrado en nuestra base de datos.";
                 }
@@ -83,7 +92,7 @@ class UsuarioController extends Controller {
         }
 
         return $this->render("BlogBundle:Usuario:registro.html.twig", array(
-                    "form" => $form->CreateView()
+            "form" => $form->CreateView()
         ));
     }
 

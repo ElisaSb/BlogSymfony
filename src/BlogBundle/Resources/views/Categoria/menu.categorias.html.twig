@@ -1,3 +1,5 @@
 {% for categoria in categorias %}
-    <li class="nav-item"><a class="nav-link" href="{{ path("blog_read_categoria", {"id":categoria.id}) }}">{{ categoria.nombre }}</a></li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path("blog_read_categoria", {"id":categoria.id}) }}">{{ categoria.nombre }}</a>
+    </li>
 {% endfor %}

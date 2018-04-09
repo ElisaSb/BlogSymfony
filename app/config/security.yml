@@ -28,6 +28,11 @@ security:
             logout: 
                 path: /logout
                 target: /blog
+
+    access_control:
+        - { path: ^/etiquetas, roles: ROLE_ADMIN }
+        - { path: ^/categorias, roles: ROLE_ADMIN }
+
             # activate different ways to authenticate
 
             # http_basic: ~

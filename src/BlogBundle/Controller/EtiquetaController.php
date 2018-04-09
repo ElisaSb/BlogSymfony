@@ -22,8 +22,12 @@ class EtiquetaController extends Controller {
         $etiqueta_repo = $em->getRepository("BlogBundle:Etiqueta");
         $etiquetas = $etiqueta_repo->findAll();
 
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
+
         return $this->render("BlogBundle:Etiqueta:index.html.twig", array(
-                    "etiquetas" => $etiquetas
+            "etiquetas" => $etiquetas,
+            "categorias" => $categorias
         ));
     }
 
