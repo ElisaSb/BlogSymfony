@@ -27,8 +27,9 @@
                 {% for ent in entrada.entradaEtiqueta %}
                     {{ ent.etiqueta.nombre }}, 
                 {% endfor %}
+                <br/>
+                <a class="btn btn-danger" href="{{path("blog_delete_entrada",{"id":entrada.id })}}"/>Eliminar</a>
             </p>
-            <p><a href="{{path("blog_delete_entrada",{"id":entrada.id})}}"/></a></p>
             
             <div class="clearfix"></div>
             <hr/>

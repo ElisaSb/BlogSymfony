@@ -97,12 +97,22 @@ class EntradaController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $entrada_repo = $em->getRepository("BlogBundle:Entrada");
-        
+        $entrada_etiqueta_repo = $em->getRepository("BlogBundle:EntradaEtiqueta");
+
         $entrada = $entrada_repo->find($id);
-        $em->remove($entrada);
-        $em->flush();
-        
-        return $this->redictectToRoute("blog_homepage");
+        $entrada_etiquetas = $entrada_etiqueta_repo->findBy(array("entrada" => $entrada));
+        foreach ($entrada_etiquetas as $et) {
+            if (is_object($et)) {
+                $em->remove($et);
+                $em->flush();
+            }
+        }
+
+        if (is_object($entrada)) {
+            $em->remove($entrada);
+            $em->flush();
+        }
+        return $this->redirectToRoute("blog_homepage");
     }
 
 }

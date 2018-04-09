@@ -43,8 +43,8 @@
                                 {% if app.user != null %}
                                     <a class="dropdown-item" href="{{path("blog_index_etiqueta")}}">Etiquetas</a>
                                     <a class="dropdown-item" href="{{path("blog_index_categoria")}}">Categorías</a>
+                                    <div class="dropdown-divider"></div>
                                 {% endif %}
-                                <div class="dropdown-divider"></div>
                                 {% if app.user == null %}
                                     <a class="dropdown-item" href="{{path("login")}}">Entrar</a>
                                 {% else %}

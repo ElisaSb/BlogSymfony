@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/symfonyCurso/src/BlogBundle/Controller/DefaultController.php</file>
-            <file>file:/var/www/html/symfonyCurso/src/BlogBundle/Form/EntradaType.php</file>
+            <file>file:/var/www/html/symfonyCurso/src/BlogBundle/Controller/EntradaController.php</file>
+            <file>file:/var/www/html/symfonyCurso/src/BlogBundle/Resources/config/routing.yml</file>
+            <file>file:/var/www/html/symfonyCurso/src/BlogBundle/Resources/views/Entrada/index.html.twig</file>
+            <file>file:/var/www/html/symfonyCurso/src/BlogBundle/Controller/EtiquetaController.php</file>
         </group>
     </open-files>
 </project-private>
