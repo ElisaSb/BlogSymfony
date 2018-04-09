@@ -43,8 +43,9 @@ class EntradaType extends AbstractType {
                 ->add('imagen', FileType::class, array(
                     "label" => "Imagen:",
                     "attr" => array(
-                        "class" => "form-imagen form-control"
-            )))
+                        "class" => "form-imagen form-control"),
+                    "data_class" => null
+             ))
                 ->add('categoria', EntityType::class, array(
                     "class" => "BlogBundle:Categoria",
                     "label" => "Categorías:",

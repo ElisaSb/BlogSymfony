@@ -51,3 +51,7 @@ blog_add_entrada:
 blog_delete_entrada:
     path:     /entrada/delete/{id}
     defaults: { _controller: BlogBundle:Entrada:delete }
+
+blog_edit_entrada:
+    path:     /entrada/edit/{id}
+    defaults: { _controller: BlogBundle:Entrada:edit }
