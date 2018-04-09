@@ -13,8 +13,8 @@ logout:
     path: /logout
 
 blog_homepage:
-    path:     /blog
-    defaults: { _controller: BlogBundle:Entrada:index }
+    path:     /blog/{pagina}
+    defaults: { _controller: BlogBundle:Entrada:index, pagina:1 }
     
 blog_index_etiqueta:
     path:     /etiquetas

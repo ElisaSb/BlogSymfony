@@ -4,6 +4,7 @@ namespace BlogBundle\Repository;
 
 use BlogBundle\Entity\Etiqueta;
 use \BlogBundle\Entity\EntradaEtiqueta;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EntradaRepository extends \Doctrine\ORM\EntityRepository {
 
@@ -56,6 +57,19 @@ class EntradaRepository extends \Doctrine\ORM\EntityRepository {
         $flush = $em->flush();
 
         return $flush;
+    }
+
+    public function getPaginaEntradas($numeroPagina=5, $currentPagina=1){
+        $em = $this->getEntityManager();
+
+        $dql = "SELECT e FROM BlogBundle\Entity\Entrada e ORDER BY e.id DESC";
+
+        $query = $em->createQuery($dql)
+            ->setFirstResult($numeroPagina*($currentPagina-1))
+            ->setMaxResults($numeroPagina);
+
+        $paginador = new Paginator($query, $fetchJoinCollection = true);
+        return $paginador;
     }
 
 }

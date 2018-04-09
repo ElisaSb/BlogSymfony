@@ -31,15 +31,37 @@
             </p>
 
             {% if (app.user.id is defined) and (entrada.usuario.id == app.user.id) %}
-            <p style="margin-left: 160px;">
-                <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}"/>Eliminar</a>
-                <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}"/>Editar</a>
-            </p>
+                <p style="margin-left: 160px;">
+                    <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">Eliminar</a>
+                    <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}">Editar</a>
+                </p>
             {% endif %}
 
             <div class="clearfix"></div>
             <hr/>
         {% endfor %}
+
+        <nav aria-label="navigation">
+            <ul class="pagination">
+                {% if(pagina!=1) %}
+                    {% set pagina = pagina-1 %}
+                {% endif %}
+
+                <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina }) }}">Anterior</a>
+                </li>
+                {% for i in 1..pagesCount %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path("blog_homepage",{"pagina":i }) }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if(pagina_m!=pagesCount) %}
+                    {% set pagina_m = pagina_m+1 %}
+                {% endif %}
+                <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina_m }) }}">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
 
     </div>
 

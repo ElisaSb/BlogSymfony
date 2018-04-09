@@ -18,19 +18,27 @@ class EntradaController extends Controller
         $this->session = new Session();
     }
 
-    public function indexAction()
+    public function indexAction($pagina)
     {
 
         $em = $this->getDoctrine()->getManager();
         $entrada_repo = $em->getRepository("BlogBundle:Entrada");
         $categoria_repo = $em->getRepository("BlogBundle:Categoria");
 
-        $entradas = $entrada_repo->findAll();
         $categorias = $categoria_repo->findAll();
+
+        $numeroPagina = 5;
+        $entradas = $entrada_repo->getPaginaEntradas($numeroPagina, $pagina);
+        $totalItems = count($entradas);
+        $pagesCount = ceil($totalItems/$numeroPagina);
 
         return $this->render("BlogBundle:Entrada:index.html.twig", array(
             "entradas" => $entradas,
-            "categorias" => $categorias
+            "categorias" => $categorias,
+            "totalItems" => $totalItems,
+            "pagesCount" => $pagesCount,
+            "pagina" => $pagina,
+            "pagina_m" => $pagina
         ));
     }
 
