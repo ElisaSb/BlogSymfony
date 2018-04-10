@@ -1,23 +1,19 @@
 login:
     path: /login
     defaults: { _controller: BlogBundle:Usuario:login }
-    
+
 registro:
     path: /registro
     defaults: { _controller: BlogBundle:Usuario:registro }
     
 login_check:
     path: /login_check
+    defaults: { _controller: BlogBundle:Usuario:validar }
     
 logout:
     path: /logout
+    defaults: { _controller: BlogBundle:Usuario:logout }
 
-blog_homepage:
-    path:     /{_locale}/blog/{pagina}
-    defaults: { _controller: BlogBundle:Entrada:index, pagina:1 }
-    requirements:
-      _locale: en|es
-    
 blog_index_etiqueta:
     path:     /etiquetas
     defaults: { _controller: BlogBundle:Etiqueta:index }
@@ -61,3 +57,9 @@ blog_delete_entrada:
 blog_edit_entrada:
     path:     /entrada/edit/{id}
     defaults: { _controller: BlogBundle:Entrada:edit }
+
+blog_homepage:
+    path:     /{_locale}/blog/{pagina}
+    defaults: { _controller: BlogBundle:Entrada:index, _locale: en, pagina:1 }
+    requirements:
+      _locale: en|es

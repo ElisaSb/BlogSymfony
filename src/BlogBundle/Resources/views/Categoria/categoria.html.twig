@@ -8,57 +8,71 @@
 
 {% block content %}
 
-    {% for entrada in entradas %}
+    <div class="col-lg-6">
+            <h1 style="margin-top: 10px;">{{ categoria.nombre }}</h1>
 
-        <p class="float-left"><img width="150" src="{{ asset("uploads/"~entrada.imagen) }}"/></p>
-        <p style="margin-left: 160px;"><strong>{{ entrada.titulo }}</strong> <br/>
-            {{ entrada.categoria.nombre }}<br/>
-            Autor: <strong>{{ entrada.usuario.nombre }}</strong> <br/>
-            {% for ent in entrada.entradaEtiqueta %}
-                {{ ent.etiqueta.nombre }}
-            {% endfor %}
-        </p>
+        {% for entrada in entradas %}
 
-        {% if (app.user.id is defined) and (entrada.usuario.id == app.user.id) %}
-            <p style="margin-left: 160px;">
-                <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">Eliminar</a>
-                <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}">Editar</a>
-            </p>
-        {% endif %}
-
-        <div class="clearfix"></div>
-        <hr/>
-    {% endfor %}
-
-    {% if(totalItems != 0) %}
-        <nav aria-label="navigation">
-            <ul class="pagination">
-
-                {% if(pagina!=1) %}
-                    {% set pagina = pagina-1 %}
-                {% endif %}
-                <li class="page-item"><a class="page-link"
-                                         href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina }) }}">Anterior</a>
-                </li>
-
-                {% for i in 1..pagesCount %}
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":i }) }}">{{ i }}</a>
-                    </li>
+            <p class="float-left"><img width="150" src="{{ asset("uploads/"~entrada.imagen) }}"/></p>
+            <p style="margin-left: 160px;"><strong>{{ entrada.titulo }}</strong> <br/>
+                {{ entrada.categoria.nombre }}<br/>
+                Autor: <strong>{{ entrada.usuario.nombre }}</strong> <br/>
+                {% for ent in entrada.entradaEtiqueta %}
+                    {{ ent.etiqueta.nombre }}
                 {% endfor %}
+            </p>
 
-                {% if(pagina_m!=pagesCount) %}
-                    {% set pagina_m = pagina_m+1 %}
-                {% endif %}
-                <li class="page-item"><a class="page-link"
-                                         href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina_m }) }}">Siguiente</a>
-                </li>
-            </ul>
-        </nav>
-    {% else %}
-        <div class="alert alert-info">Esta categoría no ha sido usada.</div>
-    {% endif %}
+            {% if (app.user.id is defined) and (entrada.usuario.id == app.user.id) %}
+                <p style="margin-left: 160px;">
+                    <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">Eliminar</a>
+                    <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}">Editar</a>
+                </p>
+            {% endif %}
+
+            <div class="clearfix"></div>
+            <hr/>
+        {% endfor %}
+
+        {% if(totalItems != 0) %}
+            <nav aria-label="navigation">
+                <ul class="pagination">
+
+                    {% if(pagina!=1) %}
+                        {% set pagina = pagina-1 %}
+                        <li class="page-item"><a class="page-link" href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina }) }}">
+                                Anterior
+                            </a>
+                        </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina }) }}">
+                                    Anterior
+                                </a>
+                            </li>
+                    {% endif %}
+
+                    {% for i in 1..pagesCount %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":i }) }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if(pagina_m!=pagesCount) %}
+                        {% set pagina_m = pagina_m+1 %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina_m }) }}">Siguiente</a>
+                        </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link"
+                                                     href="{{ path("blog_read_categoria",{"id": categoria.id, "pagina":pagina_m }) }}">Siguiente</a>
+                            </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        {% else %}
+            <div class="alert alert-info">No hay entradas con esta categoría.</div>
+        {% endif %}
 
     </div>
 

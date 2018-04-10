@@ -2,8 +2,7 @@
 
 {% block content %}
     <div class="col-lg-6">
-        <br/>
-        <h2>Añadir Entradas</h2>
+        <h2 style="margin-top: 10px;">Añadir Entradas</h2>
         
         {% if app.session.flashbag().get('status_error') is defined  %}
             {% for message in app.session.flashbag().get("status_error") %}

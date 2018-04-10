@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="col-lg-10">
-        <h1>Bienvenido</h1>
+        <h1 style="margin-top: 10px;">{{ "mensaje_bienvenida" | trans }}</h1>
 
         {% if app.session.flashbag().get('status_success') is defined %}
             {% for message in app.session.flashbag().get("status_success") %}
@@ -28,9 +28,10 @@
 
             {% if (app.user.id is defined) and (entrada.usuario.id == app.user.id) %}
                 <p style="margin-left: 160px;">
-                    <a class="btn btn-danger" href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">{% trans %}btn_delete{% endtrans %}</a>
+                    <a class="btn btn-danger"
+                       href="{{ path("blog_delete_entrada",{"id":entrada.id }) }}">{{ "btn_delete" | trans }}</a>
                     <a class="btn btn-warning" href="{{ path("blog_edit_entrada",{"id":entrada.id }) }}">
-                        {% trans %}btn_edit{% endtrans %}
+                        {{ "btn_edit" | trans }}
                     </a>
                 </p>
             {% endif %}
@@ -41,12 +42,21 @@
 
         <nav aria-label="navigation">
             <ul class="pagination">
+
                 {% if(pagina!=1) %}
                     {% set pagina = pagina-1 %}
+                    <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina }) }}">
+                            {{ "btn_anterior" | trans }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link"
+                                                      href="{{ path("blog_homepage",{"pagina":pagina }) }}">
+                            {{ "btn_anterior" | trans }}
+                        </a>
+                    </li>
                 {% endif %}
 
-                <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina }) }}">Anterior</a>
-                </li>
                 {% for i in 1..pagesCount %}
                     <li class="page-item">
                         <a class="page-link" href="{{ path("blog_homepage",{"pagina":i }) }}">{{ i }}</a>
@@ -55,11 +65,18 @@
 
                 {% if(pagina_m!=pagesCount) %}
                     {% set pagina_m = pagina_m+1 %}
+                    <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina_m }) }}">
+                            {{ "btn_siguiente" | trans }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link"
+                                                      href="{{ path("blog_homepage",{"pagina":pagina_m }) }}">
+                            {{ "btn_siguiente" | trans }}
+                        </a>
+                    </li>
                 {% endif %}
-                <li class="page-item"><a class="page-link" href="{{ path("blog_homepage",{"pagina":pagina_m }) }}">
-                        Siguiente
-                    </a>
-                </li>
+
             </ul>
         </nav>
 
