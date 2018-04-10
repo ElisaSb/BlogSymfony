@@ -29,7 +29,7 @@
             <tbody>
                 <tr class="table-secondary">
                     <td>?</td>
-                    <td><a class="btn btn-primary btn-sm" href="/categoria/add"/>Añadir categoria</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path("blog_add_categoria") }}">Añadir categoria</a></td>
                     <td colspan="2">Crea más categorias</td>
                 </tr>
                 {% for categoria in categorias %}
@@ -39,11 +39,13 @@
                         <td>{{ categoria.descripcion }}</td>
                         <td>
                             {% if categoria.entradas | length == 0 %}
-                                <a class="btn btn-danger btn-sm" href="{{path("blog_delete_categoria" ,{"id":categoria.id}) }}"/>Eliminar</a>
+                                <a class="btn btn-danger btn-sm" href="{{path("blog_delete_categoria" ,{"id":categoria.id}) }}">Eliminar</a>
                             {% else %}
-                                Categoria en uso
+                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Categoría en uso">
+                                <a class="btn btn-danger text-dark btn-sm disabled" href="#">Eliminar</a>
+                            </span>
                             {% endif %}
-                            <a class="btn btn-warning btn-sm" href="{{path("blog_edit_categoria" ,{"id":categoria.id}) }}"/>Editar</a>
+                            <a class="btn btn-warning btn-sm" href="{{path("blog_edit_categoria" ,{"id":categoria.id}) }}">Editar</a>
                         </td>
                     </tr>
                 {% endfor %}

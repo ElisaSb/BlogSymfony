@@ -11,6 +11,13 @@
     <div class="col-lg-6">
             <h1 style="margin-top: 10px;">{{ categoria.nombre }}</h1>
 
+        <ul class="list-group" style="margin-bottom: 10px;">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Entradas en total:
+                <span class="badge badge-primary badge-pill">{{ totalItems }}</span>
+            </li>
+        </ul>
+
         {% for entrada in entradas %}
 
             <p class="float-left"><img width="150" src="{{ asset("uploads/"~entrada.imagen) }}"/></p>

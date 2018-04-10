@@ -24,7 +24,7 @@
             <tbody>
                 <tr class="table-secondary">
                     <td>?</td>
-                    <td><a class="btn btn-primary btn-sm" href="/etiqueta/add"/>Añadir etiqueta</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="{{ path("blog_add_etiqueta") }}">Añadir etiqueta</a></td>
                     <td colspan="2">Crea más etiquetas</td>
                 </tr>
                 {% for etiqueta in etiquetas %}
@@ -34,7 +34,7 @@
                         <td>{{ etiqueta.descripcion }}</td>
                         <td>
                             {% if etiqueta.entradaEtiqueta | length == 0 %}
-                                <a class="btn btn-danger btn-sm" href="{{path("blog_delete_etiqueta" ,{"id":etiqueta.id}) }}"/>Eliminar</a>
+                                <a class="btn btn-danger btn-sm" href="{{path("blog_delete_etiqueta" ,{"id":etiqueta.id}) }}" >Eliminar</a>
                             {% else %}
                                 Etiqueta en uso
                             {% endif %}
