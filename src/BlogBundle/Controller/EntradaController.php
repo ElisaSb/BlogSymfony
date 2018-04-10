@@ -227,4 +227,18 @@ class EntradaController extends Controller
         ));
     }
 
+    public function detallarAction($id){
+
+        $em = $this->getDoctrine()->getManager();
+        $categoria_repo = $em->getRepository("BlogBundle:Categoria");
+        $categorias = $categoria_repo->findAll();
+        $entrada_repo = $em->getRepository("BlogBundle:Entrada");
+        $entrada = $entrada_repo->find($id);
+
+        return $this->render("BlogBundle:Entrada:detalle.html.twig", array(
+            "entrada" => $entrada,
+            "categorias" => $categorias
+        ));
+    }
+
 }

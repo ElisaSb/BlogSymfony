@@ -22,7 +22,7 @@
         {% for entrada in entradas %}
 
             <p class="float-left"><img width="150" src="{{ asset("uploads/"~entrada.imagen) }}"/></p>
-            <p style="margin-left: 160px;"><strong>{{ entrada.titulo }}</strong> <br/>
+            <p style="margin-left: 160px;"><strong><a href="{{ path("blog_detalle_entrada", {"id":entrada.id}) }}">{{ entrada.titulo }}</a></strong><br/>
                 {{ entrada.categoria.nombre }}<br/>
                 Autor: <strong>{{ entrada.usuario.nombre }}</strong> <br/>
                 {% for ent in entrada.entradaEtiqueta %}

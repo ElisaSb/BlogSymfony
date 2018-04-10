@@ -58,6 +58,10 @@ blog_edit_entrada:
     path:     /entrada/edit/{id}
     defaults: { _controller: BlogBundle:Entrada:edit }
 
+blog_detalle_entrada:
+    path:     /entrada/detalle/{id}
+    defaults: { _controller: BlogBundle:Entrada:detallar }
+
 blog_homepage:
     path:     /{_locale}/blog/{pagina}
     defaults: { _controller: BlogBundle:Entrada:index, _locale: en, pagina:1 }
