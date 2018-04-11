@@ -28,7 +28,7 @@ Proyecto prueba de Symfony 3.
    * Inicia sesión en mysql con un usuario con permisos (para crear tablas y base de datos).
    * Carga el archivo de la carpeta raíz del proyecto llamado database.sql
     
-         $ source /rutaDelArchivo/database.sql
+         mysql> source /rutaDelArchivo/database.sql
 
 <a name="parameters"></a>
 ### Modificar parameters.yml
