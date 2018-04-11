@@ -20,7 +20,7 @@ class EntradaController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/{pagina}", name="blog_homepage", defaults={"pagina" = 1, "_locale" =  "en"}, requirements={"_locale" = "en|es"})
+     * @Route("/{_locale}/{pagina}", name="blog_homepage", defaults={"pagina" = 1, "_locale" =  "es"}, requirements={"_locale" = "en|es"})
      */
 
     public function indexAction(Request $request, $pagina)
