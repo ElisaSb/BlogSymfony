@@ -14,10 +14,6 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-indice:
-    resource: "@BlogBundle/Controller/DefaultController.php"
-    type:     annotation
-
 usuario:
     resource: "@BlogBundle/Controller/UsuarioController.php"
     type:     annotation
