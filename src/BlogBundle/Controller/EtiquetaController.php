@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use BlogBundle\Entity\Etiqueta;
 use BlogBundle\Form\EtiquetaType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class EtiquetaController extends Controller {
 
@@ -15,6 +16,10 @@ class EtiquetaController extends Controller {
     public function __construct() {
         $this->session = new Session();
     }
+
+    /**
+     * @Route("/etiquetas", name="blog_index_etiqueta")
+     */
 
     public function indexAction() {
 
@@ -30,6 +35,10 @@ class EtiquetaController extends Controller {
             "categorias" => $categorias
         ));
     }
+
+    /**
+     * @Route("/etiqueta/add", name="blog_add_etiqueta")
+     */
 
     public function addAction(Request $request) {
 
@@ -77,6 +86,10 @@ class EtiquetaController extends Controller {
             "categorias" => $categorias
         ));
     }
+
+    /**
+     * @Route("/etiqueta/delete/{id}", name="blog_delete_etiqueta")
+     */
 
     public function deleteAction($id) {
 

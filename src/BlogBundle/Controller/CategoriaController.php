@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use BlogBundle\Entity\Categoria;
 use BlogBundle\Form\CategoriaType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class CategoriaController extends Controller
 {
@@ -17,6 +18,10 @@ class CategoriaController extends Controller
     {
         $this->session = new Session();
     }
+
+    /**
+     * @Route("/categorias", name="blog_index_categoria")
+     */
 
     public function indexAction()
     {
@@ -29,6 +34,10 @@ class CategoriaController extends Controller
             "categorias" => $categorias
         ));
     }
+
+    /**
+     * @Route("/categoria/add", name="blog_add_categoria")
+     */
 
     public function addAction(Request $request)
     {
@@ -78,6 +87,10 @@ class CategoriaController extends Controller
         ));
     }
 
+    /**
+     * @Route("/categoria/delete/{id}", name="blog_delete_categoria")
+     */
+
     public function deleteAction($id)
     {
 
@@ -92,6 +105,10 @@ class CategoriaController extends Controller
 
         return $this->redirectToRoute("blog_index_categoria");
     }
+
+    /**
+     * @Route("/categoria/edit/{id}", name="blog_edit_categoria")
+     */
 
     public function editAction(Request $request, $id)
     {
@@ -137,6 +154,10 @@ class CategoriaController extends Controller
             "categorias" => $categorias
         ));
     }
+
+    /**
+     * @Route("/categoria/read/{id}/{pagina}", name="blog_read_categoria", defaults={"pagina" = 1})
+     */
 
     public function categoriaAction($id, $pagina)
     {

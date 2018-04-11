@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use BlogBundle\Entity\Entrada;
 use BlogBundle\Form\EntradaType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class EntradaController extends Controller
 {
@@ -17,6 +18,10 @@ class EntradaController extends Controller
     {
         $this->session = new Session();
     }
+
+    /**
+     * @Route("/{_locale}/blog/{pagina}", name="blog_homepage", defaults={"pagina" = 1, "_locale" =  "en"}, requirements={"_locale" = "en|es"})
+     */
 
     public function indexAction(Request $request, $pagina)
     {
@@ -40,6 +45,10 @@ class EntradaController extends Controller
             "pagina_m" => $pagina
         ));
     }
+
+    /**
+     * @Route("/entrada/add", name="blog_add_entrada")
+     */
 
     public function addAction(Request $request)
     {
@@ -114,6 +123,10 @@ class EntradaController extends Controller
         ));
     }
 
+    /**
+     * @Route("/entrada/delete/{id}", name="blog_delete_entrada")
+     */
+
     public function deleteAction($id)
     {
 
@@ -136,6 +149,10 @@ class EntradaController extends Controller
         }
         return $this->redirectToRoute("blog_homepage");
     }
+
+    /**
+     * @Route("/entrada/edit/{id}", name="blog_edit_entrada")
+     */
 
     public function editAction(Request $request, $id)
     {
@@ -226,6 +243,10 @@ class EntradaController extends Controller
             "categorias" => $categorias
         ));
     }
+
+    /**
+     * @Route("/entrada/detalle/{id}", name="blog_detalle_entrada")
+     */
 
     public function detallarAction($id){
 

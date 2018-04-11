@@ -1,69 +1,63 @@
 login:
-    path: /login
-    defaults: { _controller: BlogBundle:Usuario:login }
+    resource: "@BlogBundle/Controller/UsuarioController.php"
+    type:     annotation
+
+validar:
+    resource: "@BlogBundle/Controller/UsuarioController.php"
+    type:     annotation
 
 registro:
-    path: /registro
-    defaults: { _controller: BlogBundle:Usuario:registro }
-    
-login_check:
-    path: /login_check
-    defaults: { _controller: BlogBundle:Usuario:validar }
-    
+    resource: "@BlogBundle/Controller/UsuarioController.php"
+    type:     annotation
+
 logout:
-    path: /logout
-    defaults: { _controller: BlogBundle:Usuario:logout }
+    resource: "@BlogBundle/Controller/UsuarioController.php"
+    type:     annotation
 
-blog_index_etiqueta:
-    path:     /etiquetas
-    defaults: { _controller: BlogBundle:Etiqueta:index }
-    
-blog_add_etiqueta:
-    path:     /etiqueta/add
-    defaults: { _controller: BlogBundle:Etiqueta:add }
-    
-blog_delete_etiqueta:
-    path:     /etiqueta/delete/{id}
-    defaults: { _controller: BlogBundle:Etiqueta:delete }
-    
-blog_index_categoria:
-    path:     /categorias
-    defaults: { _controller: BlogBundle:Categoria:index }
-    
-blog_add_categoria:
-    path:     /categoria/add
-    defaults: { _controller: BlogBundle:Categoria:add }
-    
-blog_edit_categoria:
-    path:     /categoria/edit/{id}
-    defaults: { _controller: BlogBundle:Categoria:edit }
+index_etiquetas:
+    resource: "@BlogBundle/Controller/EtiquetaController.php"
+    type:     annotation
 
-blog_delete_categoria:
-    path:     /categoria/delete/{id}
-    defaults: { _controller: BlogBundle:Categoria:delete }
+add_etiquetas:
+    resource: "@BlogBundle/Controller/EtiquetaController.php"
+    type:     annotation
 
-blog_read_categoria:
-    path:     /categoria/read/{id}/{pagina}
-    defaults: { _controller: BlogBundle:Categoria:categoria, pagina:1 }
-    
-blog_add_entrada:
-    path:     /entrada/add
-    defaults: { _controller: BlogBundle:Entrada:add }
-    
-blog_delete_entrada:
-    path:     /entrada/delete/{id}
-    defaults: { _controller: BlogBundle:Entrada:delete }
+delete_etiquetas:
+    resource: "@BlogBundle/Controller/EtiquetaController.php"
+    type:     annotation
 
-blog_edit_entrada:
-    path:     /entrada/edit/{id}
-    defaults: { _controller: BlogBundle:Entrada:edit }
+index_categorias:
+    resource: "@BlogBundle/Controller/CategoriaController.php"
+    type:     annotation
 
-blog_detalle_entrada:
-    path:     /entrada/detalle/{id}
-    defaults: { _controller: BlogBundle:Entrada:detallar }
+add_categorias:
+    resource: "@BlogBundle/Controller/CategoriaController.php"
+    type:     annotation
 
-blog_homepage:
-    path:     /{_locale}/blog/{pagina}
-    defaults: { _controller: BlogBundle:Entrada:index, _locale: en, pagina:1 }
-    requirements:
-      _locale: en|es
+edit_categorias:
+    resource: "@BlogBundle/Controller/CategoriaController.php"
+    type:     annotation
+
+delete_categorias:
+    resource: "@BlogBundle/Controller/CategoriaController.php"
+    type:     annotation
+
+read_categorias:
+    resource: "@BlogBundle/Controller/CategoriaController.php"
+    type:     annotation
+
+add_entrada:
+    resource: "@BlogBundle/Controller/EntradaController.php"
+    type:     annotation
+
+delete_entrada:
+    resource: "@BlogBundle/Controller/EntradaController.php"
+    type:     annotation
+
+edit_entrada:
+    resource: "@BlogBundle/Controller/EntradaController.php"
+    type:     annotation
+
+detalle_entrada:
+    resource: "@BlogBundle/Controller/EntradaController.php"
+    type:     annotation

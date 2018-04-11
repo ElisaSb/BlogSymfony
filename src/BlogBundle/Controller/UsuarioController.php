@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use BlogBundle\Entity\Usuario;
 use BlogBundle\Form\UsuarioType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UsuarioController extends Controller
 {
@@ -17,6 +18,10 @@ class UsuarioController extends Controller
     {
         $this->session = new Session();
     }
+
+    /**
+     * @Route("/login", name="login")
+     */
 
     public function loginAction(Request $request)
     {
@@ -46,6 +51,15 @@ class UsuarioController extends Controller
         ));
     }
 
+    /**
+     * @Route("login_check", name="login_check")
+     */
+
+    public function validarAction(){
+
+        return $this->redirectToRoute("login");
+    }
+
     /*public function validarAction($email)
     {
 
@@ -71,10 +85,18 @@ class UsuarioController extends Controller
         return $this->redirectToRoute("login");
     }*/
 
+    /**
+     * @Route("/logout", name="logout")
+     */
+
     public function logoutAction(Request $request)
     {
         return $this->redirectToRoute("blog_homepage");
     }
+
+    /**
+     * @Route("/registro", name="registro")
+     */
 
     public function registroAction(Request $request)
     {

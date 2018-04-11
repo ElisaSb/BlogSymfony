@@ -13,3 +13,23 @@ rutas_bundle:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+indice:
+    resource: "@BlogBundle/Controller/DefaultController.php"
+    type:     annotation
+
+usuario:
+    resource: "@BlogBundle/Controller/UsuarioController.php"
+    type:     annotation
+
+etiquetas:
+    resource: "@BlogBundle/Controller/EtiquetaController.php"
+    type:     annotation
+
+categorias:
+    resource: "@BlogBundle/Controller/CategoriaController.php"
+    type:     annotation
+
+entradas:
+    resource: "@BlogBundle/Controller/EntradaController.php"
+    type:     annotation
