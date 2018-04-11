@@ -11,7 +11,7 @@ Proyecto prueba de Symfony 3.
 4. [Arracar el servicio de Symfony](#run)
 5. [Ir a la ruta del proyecto](#ruta)
 
-##Pasos a seguir
+## Pasos a seguir
 
 <a name="clonar"></a>
 ### Clonar el proyecto
